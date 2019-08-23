@@ -148,7 +148,44 @@ let callbackCode = number => number + 2
     
    fetchAnimals() // calling the created function
 
-   // >>>>> Fetch<<<<<<<  Using Fetch to get data.
+      // >>>>>>>>>> Set up to use POST <<<<<<<<
+   const form = document.querySelector("#create-animal");
+//  Event Listern on form
+   form.addEventListener("submit", () => {
+            // when we click that submit button. Couple things need to happen. 
+
+      event.preventDefault()   //event.preventDefault
+      console.log("event.target", event.target)
+      //save the data base 
+      //show the new thing on the DOM
+      // Fetch in the case takes 2 arguments.
+      
+      let name = event.target.name.value
+      let species = event.target.species.value
+      let legs = event.target.legs.value
+      let hobby = event.target.hobby.value
+      let image = event.target.image.value
+
+      fetch("http://localhost:3000/animals", {
+         method: "POST",
+         headers: {
+            "content-Type":"application/json"
+         },
+         body: JSON.stringify({
+            // note when you have matching Key and Varible. (I.E   name: name,  as better way it to just type =>  name,)
+            name,
+            species,
+            legs,
+            hobby,
+            image
+
+         })
+      })
+         .then(Response => Response.json())
+      .then(animal => console.log(animal))
+   })
+
+   // >>>>> Fetch<<<<<<<   Using Fetch to get data.
 
    //  // We modify right here so we can use the FETCH method
    function fetchAnimals() {
