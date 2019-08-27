@@ -146,25 +146,27 @@ let callbackCode = number => number + 2
 
    const cage = document.querySelector("#zoo-animals");
     
-   fetchAnimals() // calling the created function
+ // calling the created function
 
       // >>>>>>>>>> Set up to use POST <<<<<<<<
    const form = document.querySelector("#create-animal");
 //  Event Listern on form
-   form.addEventListener("submit", () => {
+   form.addEventListener("submit", (event) => {
             // when we click that submit button. Couple things need to happen. 
 
       event.preventDefault()   //event.preventDefault
-      console.log("event.target", event.target)
+      //console.log(event)
+       console.log("event target", event.target[0].value)
+    
       //save the data base 
       //show the new thing on the DOM
       // Fetch in the case takes 2 arguments.
       
-      let name = event.target.name.value
-      let species = event.target.species.value
-      let legs = event.target.legs.value
-      let hobby = event.target.hobby.value
-      let image = event.target.image.value
+      let name = event.target[0].value
+      let species = event.target[1].value
+      let legs = event.target[2].value
+      let hobby = event.target[3].value
+      let image = event.target[4].value
 
       fetch("http://localhost:3000/animals", {
          method: "POST",
@@ -173,11 +175,11 @@ let callbackCode = number => number + 2
          },
          body: JSON.stringify({
             // note when you have matching Key and Varible. (I.E   name: name,  as better way it to just type =>  name,)
-            name,
-            species,
-            legs,
-            hobby,
-            image
+            // name,
+            // species,
+            // legs,
+            // hobby,
+            // image
 
          })
       })
@@ -190,6 +192,7 @@ let callbackCode = number => number + 2
    //  // We modify right here so we can use the FETCH method
    function fetchAnimals() {
       fetch("http://localhost:3000/animals")
+         // Most Load the Json Server for this to work
          //fetch return a PROMISE. if the fetch resolve or not
         
          // .then(function (Response) {
@@ -203,7 +206,7 @@ let callbackCode = number => number + 2
             animals.forEach(putAnimalOnDom)
          })
      }
-      
+     fetchAnimals()
       
       // NOW WE PUT EACH ANIMAL ON A DOM.
       function putAnimalOnDom(object) {

@@ -16,3 +16,4 @@
 // USING FECTH
 // in JOSN, EVERYTHING MUST BE STRINGS including the keys. [I.E] => "name", "age" etc.
 // Spelling is Important
+// type json-server --watch db.json  [to load your json data]
